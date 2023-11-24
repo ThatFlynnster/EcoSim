@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w7igi1ks4bg4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwm01"]
+albedo_color = Color(0.278431, 0.156863, 0, 1)
+
+[node name="Coconut" type="CSGSphere3D" groups=["PlantFoods"]]
+use_collision = true
+radius = 0.15
+radial_segments = 8
+rings = 4
+material = SubResource("StandardMaterial3D_bwm01")

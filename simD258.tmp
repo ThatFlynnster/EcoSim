@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceyqgvtrn240d"]
+
+[ext_resource type="Script" path="res://Simulation.gd" id="1_5yoyh"]
+[ext_resource type="PackedScene" uid="uid://dbodh6s6fhnjv" path="res://entities/coconut_tree.tscn" id="1_cxgiq"]
+[ext_resource type="PackedScene" uid="uid://bvpu10x46p2u2" path="res://environment.tscn" id="2_vxs6f"]
+[ext_resource type="PackedScene" uid="uid://blsil72iwctj5" path="res://entities/herbivore.tscn" id="4_8nsma"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xeyyo"]
+sky_top_color = Color(0.65098, 0.768627, 0.929412, 1)
+sky_horizon_color = Color(0.360784, 0.478431, 0.670588, 1)
+ground_bottom_color = Color(0.258824, 0.239216, 0.172549, 1)
+ground_horizon_color = Color(0.360784, 0.478431, 0.670588, 1)
+
+[sub_resource type="Sky" id="Sky_lkfyi"]
+sky_material = SubResource("ProceduralSkyMaterial_xeyyo")
+
+[sub_resource type="Environment" id="Environment_fduqm"]
+background_mode = 2
+sky = SubResource("Sky_lkfyi")
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ds05u"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_5yoyh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fduqm")
+camera_attributes = SubResource("CameraAttributesPhysical_ds05u")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 50, 40, 50)
+fov = 27.0
+
+[node name="Environment" parent="." instance=ExtResource("2_vxs6f")]
+
+[node name="CoconutTree" parent="." instance=ExtResource("1_cxgiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61286, 0, -35.0327)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.469472, 0.820375, 0.326467, 0, -0.369747, 0.929133, 0.882948, -0.436201, -0.173586, 0, 16, 0)
+light_color = Color(1, 1, 0.917647, 1)
+shadow_enabled = true
+
+[node name="Herbivore" parent="." instance=ExtResource("4_8nsma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70602, 0, -11.1137)

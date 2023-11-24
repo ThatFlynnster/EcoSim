@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvpu10x46p2u2"]
+
+[ext_resource type="PackedScene" uid="uid://kuau5oiqk35m" path="res://models/environment_base.tscn" id="1_hw03a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu01d"]
+albedo_color = Color(0.0392157, 0.290196, 0.4, 1)
+roughness = 0.06
+clearcoat_roughness = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g5xy1"]
+material = SubResource("StandardMaterial3D_yu01d")
+size = Vector2(4000, 4000)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cgiyv"]
+sky_top_color = Color(0.286275, 0.458824, 0.701961, 1)
+
+[sub_resource type="Sky" id="Sky_wpo5n"]
+sky_material = SubResource("ProceduralSkyMaterial_cgiyv")
+
+[sub_resource type="Environment" id="Environment_ikkgq"]
+background_mode = 2
+background_color = Color(0.788235, 0.968627, 1, 1)
+sky = SubResource("Sky_wpo5n")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 0.921569, 1)
+fog_light_color = Color(0.611765, 0.584314, 0.517647, 1)
+fog_density = 0.002
+
+[node name="Environment" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("PlaneMesh_g5xy1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ikkgq")
+
+[node name="environment" parent="." instance=ExtResource("1_hw03a")]

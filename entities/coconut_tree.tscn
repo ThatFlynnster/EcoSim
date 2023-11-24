@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbodh6s6fhnjv"]
+
+[ext_resource type="PackedScene" uid="uid://drgtdakdhx1ip" path="res://blends/coconut_tree.blend" id="1_6i67n"]
+[ext_resource type="Script" path="res://scripts/coconut_tree.gd" id="1_clr22"]
+[ext_resource type="PackedScene" uid="uid://mcu1qn1tuf7m" path="res://scripts/health_component.tscn" id="2_aanq3"]
+[ext_resource type="PackedScene" uid="uid://r222vtqoas2" path="res://scripts/hitbox_component.tscn" id="3_ospbg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_deqde"]
+height = 3.0
+radius = 0.2
+
+[node name="CoconutTree" type="Node3D" groups=["Plants"]]
+script = ExtResource("1_clr22")
+
+[node name="coconut_tree" parent="." instance=ExtResource("1_6i67n")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_aanq3")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ospbg")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_deqde")

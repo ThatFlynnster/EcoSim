@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceyqgvtrn240d"]
+
+[ext_resource type="Script" path="res://scripts/Simulation.gd" id="1_biehm"]
+[ext_resource type="PackedScene" uid="uid://bvpu10x46p2u2" path="res://scenes/environment.tscn" id="2_a50et"]
+
+[node name="Simulation" type="Node3D" groups=["Simulation"]]
+script = ExtResource("1_biehm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 50, 40, 50)
+current = true
+fov = 27.0
+
+[node name="Environment" parent="." instance=ExtResource("2_a50et")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.469472, 0.820375, 0.326467, 0, -0.369747, 0.929133, 0.882948, -0.436201, -0.173586, 0, 16, 0)
+light_color = Color(1, 1, 0.917647, 1)
+shadow_enabled = true
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 323.0
+offset_bottom = 146.0
+
+[node name="DebugInfo" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
