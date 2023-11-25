@@ -13,6 +13,8 @@ var herbivores
 
 var time = 0
 var day = 1
+var tickSpeed = 100
+var progressing = false
 
 func _ready():
 	spawn(prefabPlant, 32, 2.5)
@@ -24,24 +26,36 @@ func _ready():
 	+ "[DEBUG]: Total of " + str(len(herbivores)) + " herbivores spawned")
 
 func _physics_process(delta):
-	if time / 480 >= day:
-		day += 1
-#		Signals.day_passed.emit()
-		emit_signal("day_passed")
-		countHerbivores()
-	time += 1
+	progressTime()
 
 func _process(delta):
 	init += "Day: " + str(day)
-	init += "\nTime: " + str(time)
+#	init += "\nTime: " + str(time)
 	init += "\nHerbivores: " + str(len(herbivores))
 	
 	debugInfo.text = init
 	init = ""
 
+func progressTime():
+#	if time / 480 >= day:
+#		day += 1
+##		Signals.day_passed.emit()
+#		emit_signal("day_passed")
+#		countHerbivores()
+#	time += 1
+	if progressing: return
+	progressing = true
+	var timer = get_tree().create_timer(8)
+	await timer.timeout
+	timer = null
+	day += 1
+	emit_signal("day_passed")
+	countHerbivores()
+	progressing = false
+
 func countHerbivores():
 	herbivores = get_tree().get_nodes_in_group("Herbivores")
-	print_debug(len(herbivores))
+#	print_debug(len(herbivores))
 
 func randomPos():
 	return Vector3(randf_range(-13, 13), 0, randf_range(-13, 13))

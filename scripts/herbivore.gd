@@ -95,3 +95,8 @@ func _on_hitbox_component_body_entered(body):
 		body.queue_free()
 		energy += 1
 #		print_debug("[DEBUG]: current energy is " + str(energy))
+
+
+func _on_view_range_body_entered(body):
+	if !alive: return
+#	if body.is_in_group("PlantFoods"):

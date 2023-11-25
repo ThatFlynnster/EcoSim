@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ceyqgvtrn240d"]
+[gd_scene load_steps=4 format=3 uid="uid://ceyqgvtrn240d"]
 
 [ext_resource type="Script" path="res://scripts/Simulation.gd" id="1_biehm"]
 [ext_resource type="PackedScene" uid="uid://bvpu10x46p2u2" path="res://scenes/environment.tscn" id="2_a50et"]
+[ext_resource type="Script" path="res://scenes/Pause.gd" id="3_8jhvi"]
 
 [node name="Simulation" type="Node3D" groups=["Simulation"]]
 script = ExtResource("1_biehm")
@@ -18,11 +19,20 @@ transform = Transform3D(0.469472, 0.820375, 0.326467, 0, -0.369747, 0.929133, 0.
 light_color = Color(1, 1, 0.917647, 1)
 shadow_enabled = true
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("3_8jhvi")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
 offset_right = 323.0
 offset_bottom = 146.0
 
-[node name="DebugInfo" type="Label" parent="Panel"]
+[node name="DebugInfo" type="Label" parent="Control/Panel"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
