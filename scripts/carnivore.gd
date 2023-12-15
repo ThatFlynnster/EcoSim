@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 
-var speed = 2.0
+var speed = 4.0
 var size = 1.0
 var view = 1.0
 
@@ -10,7 +10,7 @@ const speedRange = Vector2(1.0, 4.0)
 const sizeRange = Vector2(0.5, 2.0)
 const viewRange = Vector2(0.5, 2.0)
 
-const prefabChild = preload("res://entities/herbivore.tscn")
+const prefabChild = preload("res://entities/carnivore.tscn")
 const prefabTree = preload("res://entities/coconut_tree.tscn")
 var sim
 
@@ -41,7 +41,7 @@ func _process(delta):
 func day_passed():
 	if energy == 0:
 #		print_debug("[DEBUG]: Starved to death")
-		remove_from_group("Herbivores")
+		remove_from_group("Carnivores")
 		alive = false
 		var tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 		tween.tween_property(self, "scale", Vector3.ZERO, 0.6)
@@ -54,7 +54,7 @@ func day_passed():
 #			var i = randi_range(1, 8)
 #			if i == 1:
 #				spawn(prefabTree, position, "CoconutTree")
-			spawn(prefabChild, position, "Herbivore")
+			spawn(prefabChild, position, "Carnivore")
 	#		print_debug("[DEBUG]: Reproduced")
 	energy = 0
 #		print_debug("[DEBUG]: Survived")
@@ -95,14 +95,24 @@ func spawn(entity, pos, stringName):
 
 
 
-func _on_hitbox_component_body_entered(body):
-	if !alive: return
-	if body.is_in_group("PlantFoods"):
-		body.queue_free()
-		energy += 1
-#		print_debug("[DEBUG]: current energy is " + str(energy))
+#func _on_hitbox_component_body_entered(body):
+#	if !alive: return
+#	if body.is_in_group("HerbivoreHitbox"):
+#		queue_free()
+##		body.queue_free()
+#		energy += 1
+##		print_debug("[DEBUG]: current energy is " + str(energy))
 
 
 func _on_view_range_body_entered(body):
 	if !alive: return
 #	if body.is_in_group("PlantFoods"):
+
+
+func _on_hitbox_component_area_entered(area):
+	if !alive: return
+	if area.is_in_group("HerbivoreHitbox"):
+		area.get_parent().remove_from_group("Herbivores")
+		area.get_parent().queue_free()
+		
+		energy += 1

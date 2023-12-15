@@ -2,6 +2,7 @@ extends Node3D
 
 const spawnInterval = 420
 var spawnTime = 0
+var age = 0
 
 const coconut = preload("res://entities/coconut.tscn")
 
@@ -11,8 +12,11 @@ func _ready():
 	day_passed()
 
 func day_passed():
+#	if age >= 15: queue_free()
+#	else:
+#		spawn(coconut, 2, 0)
 	spawn(coconut, 2, 0)
-#	print_debug("COCONUT!")
+	age += 1
 
 func _physics_process(delta):
 #	if spawnTime == 0:
