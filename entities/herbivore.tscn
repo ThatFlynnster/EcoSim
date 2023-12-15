@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://blsil72iwctj5"]
+[gd_scene load_steps=8 format=3 uid="uid://blsil72iwctj5"]
 
 [ext_resource type="Script" path="res://scripts/herbivore.gd" id="1_g28wn"]
 [ext_resource type="PackedScene" uid="uid://r222vtqoas2" path="res://scripts/hitbox_component.tscn" id="2_e5muc"]
 [ext_resource type="PackedScene" uid="uid://mcu1qn1tuf7m" path="res://scripts/health_component.tscn" id="3_4ebpd"]
+[ext_resource type="Script" path="res://scripts/ViewRangeComponentHerb.gd" id="4_c73f1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yxqtg"]
 radius = 0.25
@@ -14,7 +15,7 @@ height = 0.75
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_x8vkv"]
 height = 1.5
-radius = 1.0
+radius = 2.5
 
 [node name="Herbivore" type="CharacterBody3D" groups=["Herbivores"]]
 script = ExtResource("1_g28wn")
@@ -39,11 +40,15 @@ shape = SubResource("CapsuleShape3D_65gno")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_4ebpd")]
 
-[node name="ViewRange" parent="." instance=ExtResource("2_e5muc")]
+[node name="ViewRangeComponent" parent="." instance=ExtResource("2_e5muc")]
+script = ExtResource("4_c73f1")
 
-[node name="View" type="CollisionShape3D" parent="ViewRange"]
+[node name="ViewRange" type="CollisionShape3D" parent="ViewRangeComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("CylinderShape3D_x8vkv")
 
 [connection signal="body_entered" from="HitboxComponent" to="." method="_on_hitbox_component_body_entered"]
-[connection signal="body_entered" from="ViewRange" to="." method="_on_view_range_body_entered"]
+[connection signal="area_entered" from="ViewRangeComponent" to="ViewRangeComponent" method="_on_area_entered"]
+[connection signal="area_exited" from="ViewRangeComponent" to="ViewRangeComponent" method="_on_area_exited"]
+[connection signal="body_entered" from="ViewRangeComponent" to="ViewRangeComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="ViewRangeComponent" to="ViewRangeComponent" method="_on_body_exited"]

@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("CapsuleShape3D_65gno")
 disabled = true
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4t01k")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["CarnivoreHitbox"] instance=ExtResource("3_4t01k")]
 health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape3D" parent="HitboxComponent"]

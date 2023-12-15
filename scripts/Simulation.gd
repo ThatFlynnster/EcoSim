@@ -20,7 +20,7 @@ var progressing = false
 
 func _ready():
 	spawn(prefabPlant, 32, 2.5)
-	spawn(prefabHerbivore, 32, 3)
+	spawn(prefabHerbivore, 16, 3)
 	spawn(prefabCarnivore, 1, 5)
 	countEntities()
 	print_debug(\

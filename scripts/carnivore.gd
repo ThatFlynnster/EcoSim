@@ -120,7 +120,7 @@ func spawn(entity, pos, stringName):
 	sim.add_child(child)
 
 func _on_hitbox_component_area_entered(area):
-	if !alive: return
+	if !alive or energy >= 2: return
 	if area.is_in_group("HerbivoreHitbox"):
 		area.get_parent().remove_from_group("Herbivores")
 		foodlist.erase(area.get_parent())
