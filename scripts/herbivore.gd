@@ -108,18 +108,22 @@ func wander():
 func bounce():
 	if position.x >= 14:
 		position.x -= 0.05
+		predatorList = null
 		rotation.y = randf_range(-PI, PI)
 		wanderTime = 3
 	elif position.x <= -14:
 		position.x += 0.05
+		predatorList = null
 		rotation.y = randf_range(-PI, PI)
 		wanderTime = 3
 	elif position.z >= 14:
 		position.z -= 0.05
+		predatorList = null
 		rotation.y = randf_range(-PI, PI)
 		wanderTime = 3
 	elif position.z <= -14:
 		position.z += 0.05
+		predatorList = null
 		rotation.y = randf_range(-PI, PI)
 		wanderTime = 3
 

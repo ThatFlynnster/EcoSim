@@ -64,7 +64,7 @@ func day_passed():
 #				spawn(prefabTree, position, "CoconutTree")
 			spawn(prefabChild, position, "Carnivore")
 	#		print_debug("[DEBUG]: Reproduced")
-	energy = 0
+	energy -= 1
 #		print_debug("[DEBUG]: Survived")
 
 func detected(food):
