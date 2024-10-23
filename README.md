@@ -9,6 +9,7 @@
 5. Consuming food within the time limit ensures survival, and even reproduction if fed well
 6. Reproduction is basically duplication, but values of children are slightly modified to simulate mutation
 7. Observe how the average values relevent to survival slowly evolve into an optimized state
+- It seems that I haven't pushed the latest version yet, so these descriptions aren't 100% correct atm
 
 ## Controls
 - Space to pause
